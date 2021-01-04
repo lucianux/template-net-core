@@ -21,6 +21,7 @@ using AspnetRun.Core.Repositories;
 using AspnetRun.Core.Repositories.Base;
 using AspnetRun.Core.Configuration;
 using AspnetRun.Infrastructure.Repository.Base;
+using Microsoft.OpenApi.Models;
 
 namespace AspnetRun.Web
 {
@@ -46,6 +47,11 @@ namespace AspnetRun.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Template NET Core", Version = "v1" });
+            });
             services.AddRazorPages();
         }        
 
@@ -55,6 +61,8 @@ namespace AspnetRun.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Template NET Core v1"));
             }
             else
             {
@@ -72,6 +80,7 @@ namespace AspnetRun.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
 
