@@ -63,3 +63,5 @@ https://localhost:5001/WeatherForecast -- API
 https://localhost:5001/swagger/index.html -- Test APIs
 
 https://localhost:5001/Product -- Web
+
+https://figure-fact.rj.r.appspot.com/ -- App en Google Cloud
